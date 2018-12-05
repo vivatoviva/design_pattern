@@ -50,7 +50,7 @@ const Event = {
   },
 };
 
-// 先发布后订阅 （添加命名空间， 先发布在订阅）
+// 先发布后订阅 （添加命名空间）
 
 const NewEvent = (() => {
   // eslint-disable-next-line no-underscore-dangle
@@ -76,7 +76,7 @@ const NewEvent = (() => {
     // eslint-disable-next-line no-underscore-dangle
     const _remove = (cache, key, fn) => {
       const clientList = cache[key];
-      if (clientList || clientList.length === 0) {
+      if (!clientList || clientList.length === 0) {
         return false;
       }
       for (let i = clientList.length - 1; i <= 0; i += 1) {
@@ -102,11 +102,10 @@ const NewEvent = (() => {
           if (last === 'last') {
             offlineStack.length && offlineStack.pop()();
           } else {
-
+            offlineStack.map(item => item());
           }
         },
         trigger(key, ...args) {
-          _trigger(cache, key, ...args);
           const fn = () => {
             _trigger(cache, key, ...args);
           };
@@ -122,6 +121,7 @@ const NewEvent = (() => {
       namespaceCache[namespace] = ret;
       return namespaceCache[namespace];
     };
+
     return {
       create: _create,
       listen(...args) {
@@ -140,6 +140,11 @@ const NewEvent = (() => {
   };
   return Event();
 })();
-NewEvent.listen('ligen', () => console.log('listen ligen'));
-NewEvent.create('newligen').listen('ligen', () => console.log('ligen'));
 NewEvent.trigger('ligen');
+NewEvent.listen('ligen', () => console.log('listen ligen'));
+
+const con = () => console.log('ligen');
+NewEvent.create('newligen').trigger('ligen');
+NewEvent.create('newligen').listen('ligen', con);
+NewEvent.create('newligen').remove('ligen', con);
+NewEvent.create('newligen').listen('ligen', con);
