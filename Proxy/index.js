@@ -92,3 +92,8 @@
 // console.log(proxyMult(1, 2, 3));
 // console.log(proxyMult(1, 2, 3));
 // console.log(proxyMult(1, 2, 3, 4));
+
+// 创建缓存代理的工厂
+const createProxyFactory = (fn) => {
+  
+}

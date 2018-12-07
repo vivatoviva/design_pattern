@@ -32,8 +32,12 @@ const People = function (name) {
 People.prototype.getName = function () {
   console.log(this.name);
 };
+
+
 const SingletonPeople = proxySingleton(People);
 
 const people1 = new SingletonPeople('ligen');
 const people2 = new SingletonPeople('ligen');
 console.log(people1 === people2);
+
+// 实现方式3
