@@ -1,8 +1,8 @@
 // 通用结构
 
-function Upload (uploadType) {
+function Upload(uploadType) {
   this.uploadType = uploadType;
-};
+}
 
 Upload.prototype.deFile = function (id) {
   uploadManager.setExternalState(id, this);
