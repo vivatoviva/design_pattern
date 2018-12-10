@@ -31,7 +31,6 @@ const uploadManager = (function () {
   return {
     add(id, uploadType, fileName, fileSize) {
       const flyWeightObj = UploadFactory.create(uploadType);
-      
       const dom = document.createElement('div');
       dom.innerHTML = '<span class="deFile">删除</span>';
       dom.querySelector('.deFile').onClick = function() {
@@ -46,9 +45,7 @@ const uploadManager = (function () {
     },
     setExternalState(id, flyWeightObj) {
       const uploadData = uploadDatabase[id];
-      for(let index in uploadData) {
-        flyWeightObj[index] = uploadData[index];
-      };
+      Object.assign(flyWeightObj, uploadData);
     }
   }
 })()
