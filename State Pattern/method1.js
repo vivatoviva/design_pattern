@@ -27,7 +27,7 @@ class OnlineState {
   constructor(failSafeSocket) {
     this.failSafeSocket = failSafeSocket;
   }
-  
+
   send(data) {
     this.failSafeSocket.socket.push(data);
   }
