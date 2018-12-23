@@ -63,6 +63,7 @@
 //     return self.apply(obj, args);
 //   }
 // };
+
 // const reduce = Array.prototype.reduce.invoke();
 // function mult() {
 //   return reduce(arguments, (prev, current) => prev + current, 0);
